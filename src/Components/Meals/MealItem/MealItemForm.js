@@ -22,7 +22,6 @@ const MealItemForm = (props) => {
         const item = props.item;
         item.amount = enteredAmountNumber;
         CartContext.addItem(item);
-        console.log(enteredAmountNumber, props.item);
     };
 
     return (
