@@ -21,8 +21,11 @@ const Cart = ({ cartHideHandler }) => {
                     <CartItem
                         key={cartItem.id}
                         item={cartItem}
-                        onRemove={cartItemRemoveHandler.bind(null, cartItem)}
-                        onAdd={cartItemAddHandler.bind(null, cartItem)}
+                        onRemove={cartItemRemoveHandler.bind(null, cartItem.id)}
+                        onAdd={cartItemAddHandler.bind(null, {
+                            ...cartItem,
+                            amount: 1,
+                        })}
                     />
                 );
             })}

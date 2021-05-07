@@ -40,13 +40,15 @@ const cartReducer = (state, action) => {
         let tempItem = null;
         let updatedItems = [];
         for (let i = 0; i < items.length; i++) {
-            if (items[i].id === action.item.id) {
+            if (items[i].id === action.id) {
                 tempItem = items[i];
+                tempItem.amount -= 1;
+                if (tempItem.amount > 0) updatedItems.push(tempItem);
             } else updatedItems.push(items[i]);
         }
         return {
             items: updatedItems,
-            totalAmount: state.totalAmount - tempItem.amount * tempItem.price,
+            totalAmount: state.totalAmount - tempItem.price,
         };
     }
     return defaultCartState;
