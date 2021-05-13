@@ -1,10 +1,11 @@
-import React, { useContext, useReducer } from "react";
+import React, { useReducer } from "react";
 
 const AuthContext = React.createContext({
     items: [],
     totalAmount: 0,
     addItem: (item) => {},
     removeItem: (id) => {},
+    clearCart: () => {},
 });
 const defaultCartState = {
     items: [],
@@ -51,6 +52,9 @@ const cartReducer = (state, action) => {
             totalAmount: state.totalAmount - tempItem.price,
         };
     }
+    if (action.type === "CLEAR") {
+        return { items: [], totalAmount: 0 };
+    }
     return defaultCartState;
 };
 export const AuthProvider = (props) => {
@@ -61,6 +65,9 @@ export const AuthProvider = (props) => {
     const removeItemFromCartHandler = (id) => {
         dispatchCart({ type: "REMOVE_FROM_CART", id: id });
     };
+    const clearCartHandler = () => {
+        dispatchCart({ type: "CLEAR_" });
+    };
     return (
         <AuthContext.Provider
             value={{
@@ -68,6 +75,7 @@ export const AuthProvider = (props) => {
                 totalAmount: cartState.totalAmount,
                 addItem: addItemToCartHandler,
                 removeItem: removeItemFromCartHandler,
+                clearCart: clearCartHandler,
             }}
         >
             {props.children}
