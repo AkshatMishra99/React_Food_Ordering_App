@@ -97,11 +97,13 @@ const Cart = ({ cartHideHandler }) => {
     );
     const isSubmittingModalContent = <p>Sending order data...</p>;
     const didSubmitModalContent = <p>Order submitted successfully!!!</p>;
+    const errorContent = <p>{error}</p>;
     return (
         <Modal cartHideHandler={cartHideHandler}>
-            {!isSubmitting && !didSubmit && cartModalContent}
-            {!isSubmitting && didSubmit && didSubmitModalContent}
-            {isSubmitting && isSubmittingModalContent}
+            {error && errorContent}
+            {!error && !isSubmitting && !didSubmit && cartModalContent}
+            {!error && !isSubmitting && didSubmit && didSubmitModalContent}
+            {!error && isSubmitting && isSubmittingModalContent}
         </Modal>
     );
 };
